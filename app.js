@@ -32,9 +32,33 @@ const Student = mongoose.model('Student',studentSchema);
 // create an object
 
 const Albert = new Student({name:'albert huang',age:28,work:'front end engineer'});
+const friends = 
+    [
+        {name:'albert huang',age:28,work:'front end engineer'},
+        {name:'brain chen',age:30,work:'sale'},
+        {name:'frank yung',age:34,work:'manager'},
+        {name:'dan chen',age:25,work:'student'},
+    ];
 
-//===  save Albert to DB === 
-// Albert.save()
+// ===  save  === 
+
+//object => save()
+// Albert.save();
+
+// model => insertMany
+// Student.insertMany(friends)
+
+// .then((success)=>{
+//     console.log(success);
+// })
+// .catch((err)=>{
+//     console.log(err)
+// })
+
+// Student.find({})
+// .then((data)=>{
+//     console.log(data)
+// })
 // .then(()=>{
 //     console.log('albert has been saved to DB')
 // })
@@ -48,19 +72,19 @@ const Albert = new Student({name:'albert huang',age:28,work:'front end engineer'
 //     console.log(data);
 // })
 
-//=== find one ===
+// === find one ===
 // Student.findOne({name:'albert huang'})
 // .then((data)=>{
 //     console.log(data)
 // })
 
-//=== find ===
+// === find ===
 // Student.find({})
 // .then((data)=>{
 //     console.log(data)
 // })
 
-//=== updateOne ===
+// === updateOne ===
 // Student.updateOne({name:'albert huang'},{name:'brain chen'})
 // .then((msg)=>{
 //     console.log(msg)
@@ -71,7 +95,7 @@ const Albert = new Student({name:'albert huang',age:28,work:'front end engineer'
 //     console.log(data)
 // })
 
-//=== findOneAndUpdate ===
+// === findOneAndUpdate ===
 // Student.findOneAndUpdate({name:'brain chen'},{name:'albert huang'},{new:true})
 // .then((msg)=>{
 //     console.log(msg)
@@ -82,6 +106,16 @@ const Albert = new Student({name:'albert huang',age:28,work:'front end engineer'
 //     console.log(data)
 // })
 
+// === delete
+// Student.deleteOne({name:{$gte:25}})
+// .then((msg)=>{
+//     console.log(msg)
+// })
+
+// Student.findOneAndDelete({age:{$gte:30}})
+// .then((msg)=>{
+//     console.log(msg)
+// })
 
 app.use(express.static('public'));
 
