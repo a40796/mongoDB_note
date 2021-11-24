@@ -15,7 +15,6 @@ mongoose.connect('mongodb://localhost:27017/exampleDB')
 })
 
 // defined  a schema
-
 const studentSchema = new mongoose.Schema({
     name:String,
     age:Number,
@@ -32,9 +31,9 @@ const Student = mongoose.model('Student',studentSchema);
 
 // create an object
 
-// const Albert = new Student({name:'albert huang',age:28,work:'front end engineer'});
+const Albert = new Student({name:'albert huang',age:28,work:'front end engineer'});
 
-// save Albert to DB
+//===  save Albert to DB === 
 // Albert.save()
 // .then(()=>{
 //     console.log('albert has been saved to DB')
@@ -43,16 +42,46 @@ const Student = mongoose.model('Student',studentSchema);
 //     console.log('error has happend',err)
 // })
 
-//find objects in students
+// === find objects in students === 
 // Student.find({})
 // .then((data)=>{
 //     console.log(data);
 // })
 
-Student.findOne({name:'albert huang'})
-.then((data)=>{
-    console.log(data)
-})
+//=== find one ===
+// Student.findOne({name:'albert huang'})
+// .then((data)=>{
+//     console.log(data)
+// })
+
+//=== find ===
+// Student.find({})
+// .then((data)=>{
+//     console.log(data)
+// })
+
+//=== updateOne ===
+// Student.updateOne({name:'albert huang'},{name:'brain chen'})
+// .then((msg)=>{
+//     console.log(msg)
+// })
+
+// Student.find({})
+// .then((data)=>{
+//     console.log(data)
+// })
+
+//=== findOneAndUpdate ===
+// Student.findOneAndUpdate({name:'brain chen'},{name:'albert huang'},{new:true})
+// .then((msg)=>{
+//     console.log(msg)
+// })
+
+// Student.find({age:{$gte:27}})
+// .then(data=>{
+//     console.log(data)
+// })
+
 
 app.use(express.static('public'));
 
