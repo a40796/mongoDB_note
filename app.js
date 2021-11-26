@@ -16,12 +16,35 @@ mongoose.connect('mongodb://localhost:27017/exampleDB')
 
 // defined  a schema
 const studentSchema = new mongoose.Schema({
-    name:String,
-    age:Number,
-    work:String,
+    name:{
+        type:String,
+        required : [true,'you forget to input the name'],
+        maxlength:[15,'name is too long.']
+    },
+    age:{
+        type:Number,
+        required : true,
+        default : 18
+    },
+    work:{
+        type:String,
+        default : "undecided",
+        enum:[
+            'front end engineer',
+            'sale',
+            'manager',
+            'student'
+        ]
+    },
     mojor:{
-        highschool:String,
-        university:String
+        highschool:{
+            type:String,
+            default : "undecided"
+        },
+        university:{
+            type:String,
+            default : "undecided"
+        }
     }
 })
 
@@ -31,14 +54,22 @@ const Student = mongoose.model('Student',studentSchema);
 
 // create an object
 
-const Albert = new Student({name:'albert huang',age:28,work:'front end engineer'});
-const friends = 
-    [
-        {name:'albert huang',age:28,work:'front end engineer'},
-        {name:'brain chen',age:30,work:'sale'},
-        {name:'frank yung',age:34,work:'manager'},
-        {name:'dan chen',age:25,work:'student'},
-    ];
+const newStudent = new Student({
+    name:'luke',
+    age:38,
+    work:'teacher',
+})
+newStudent.save()
+.then(()=>{
+    console.log('data has been saved')
+})
+.catch((err)=>{
+    console.log('error has happend',err)
+})
+
+// ===  validate ===
+
+
 
 // ===  save  === 
 
