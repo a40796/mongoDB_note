@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const ejs = require('ejs');
 const mongoose = require('mongoose');
+const fs = require('fs');
 
 // connect to mongodb
 
@@ -48,10 +49,17 @@ const studentSchema = new mongoose.Schema({
         }
     }
 })
+studentSchema.pre('save',async function(){
+    fs.writeFile('presave.txt','one data is trying to be saved',(e)=>{
+        if (e) throw e;
+    })
+})
+// pre => function 執行之前 , post 執行之後
+
 // create an instance method
-studentSchema.methods.emplyeeName = function(){
-    return 'mr.' + this.name;
-}
+// studentSchema.methods.emplyeeName = function(){
+//     return 'mr.' + this.name;
+// }
 
 // create a model for students
 
@@ -60,9 +68,17 @@ const Student = mongoose.model('Student',studentSchema);
 // create an object
 
 const newStudent = new Student({
-    name:'luke',
+    name:'luke xxxxx',
     age:38,
-    work:'teacher',
+    work:'manager',
+})
+newStudent.save()
+.then((res)=>{
+    console.log('has been saved')
+})
+.catch((err)=>{
+    console.log('has not been saved')
+    console.log(err)
 })
 // instansce method
 // Student.findOne({name:'albert huang'})
@@ -75,7 +91,6 @@ const newStudent = new Student({
 //         console.log(`the emplyee name is ${item.emplyeeName()}`)
 //     })
 // })
-
 
 // newStudent.save()
 // .then(()=>{
