@@ -24,7 +24,8 @@ const studentSchema = new mongoose.Schema({
     age:{
         type:Number,
         required : true,
-        default : 18
+        default : 18,
+        max:100
     },
     work:{
         type:String,
@@ -59,16 +60,27 @@ const newStudent = new Student({
     age:38,
     work:'teacher',
 })
-newStudent.save()
-.then(()=>{
-    console.log('data has been saved')
-})
-.catch((err)=>{
-    console.log('error has happend',err)
-})
+// newStudent.save()
+// .then(()=>{
+//     console.log('data has been saved')
+// })
+// .catch((err)=>{
+//     console.log('error has happend',err)
+// })
 
 // ===  validate ===
 
+// Student.findOneAndUpdate(
+//     {name:'frank yung'},{age:101},
+//     {new:true, runValidators:true}
+// )
+// .then((res)=>{
+//     console.log('update success')
+// })
+// .catch((err)=>{
+//     console.log('update failed')
+//     console.log(err)
+// })
 
 
 // ===  save  === 
