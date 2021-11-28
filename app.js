@@ -48,6 +48,10 @@ const studentSchema = new mongoose.Schema({
         }
     }
 })
+// create an instance method
+studentSchema.methods.emplyeeName = function(){
+    return 'mr.' + this.name;
+}
 
 // create a model for students
 
@@ -60,6 +64,19 @@ const newStudent = new Student({
     age:38,
     work:'teacher',
 })
+// instansce method
+// Student.findOne({name:'albert huang'})
+// .then((data)=>{
+//     console.log(data.emplyeeName())
+// })
+// Student.find({})
+// .then((data)=>{
+//     data.forEach((item)=>{
+//         console.log(`the emplyee name is ${item.emplyeeName()}`)
+//     })
+// })
+
+
 // newStudent.save()
 // .then(()=>{
 //     console.log('data has been saved')
